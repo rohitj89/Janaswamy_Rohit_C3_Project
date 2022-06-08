@@ -84,4 +84,33 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //>>>>>>>>>>>>>>>>>>>>>>>ITEMS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void selecting_no_item_from_menu_should_show_cost_as_0(){
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+
+        assertEquals(restaurant.estimateCostOfItems(""),0);
+    }
+
+    @Test
+    public void selecting_any_item_should_sum_price_of_3_items_and_display_total_price_of_3_items(){
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("Alio Oglio Pasta", 298);
+        restaurant.addToMenu("Farmer's Veg Pizza", 348);
+
+        assertEquals(restaurant.estimateCostOfItems("Sweet corn soup","Vegetable lasagne","Farmer's Veg Pizza"),736);
+
+    }
 }
